@@ -1,0 +1,4 @@
+﻿  z5.3.cpp
+D:\C++\z5.3\z5.3\z5.3.cpp(25,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\C++\z5.3\z5.3\z5.3.cpp(83,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  z5.3.vcxproj -> D:\C++\z5.3\x64\Debug\z5.3.exe
