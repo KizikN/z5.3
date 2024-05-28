@@ -1,5 +1,6 @@
 #include<iostream>
 #include<list>
+#include<forward_list>
 #include<time.h>
 
 using namespace std;
@@ -10,7 +11,7 @@ void Part2();
 int main()
 {
 	//=========
-	int i = 0;
+	int i = 1;
 	//=========
 	if (i)
 		Part1(); // z2.4
@@ -23,15 +24,15 @@ int main()
 void Part1()
 {
 	srand(time(NULL));
-	list<char>L1, L2;
+	forward_list<char>L1, L2;
 	for (int i = 0; i < 5; i++)
-		L1.push_back(65 + rand() % 25);
+		L1.push_front(65 + rand() % 25);
 	for (int i = 0; i < 6; i++)
-		L2.push_back(65 + rand() % 25);
+		L2.push_front(65 + rand() % 25);
 
-	list<char>::iterator p = L1.begin();
-	list<char> L;
-	L.push_back(*p);
+	forward_list<char>::iterator p = L1.begin();
+	forward_list<char> L;
+	L.push_front(*p);
 
 	for (; p != L1.end(); p++)
 		cout << *p << " ";
@@ -42,41 +43,40 @@ void Part1()
 
 	for (p = L1.begin(); p != L1.end(); p++)
 	{
-		for (list<char>::iterator k = L.begin(); k != L.end(); k++)
+		for (forward_list<char>::iterator k = L.begin(); k != L.end();)
 		{
 			if (*k == *p)
 				break;
 			if (++k == L.end())
 			{
-				k--;
-				L.push_back(*p);
+				L.push_front(*p);
 				break;
 			}
-			else
-				k--;
-		}
-	}
-	for (p = L2.begin(); p != L2.end(); p++)
-	{
-		for (list<char>::iterator k = L.begin(); k != L.end(); k++)
-		{
-			if (*k == *p)
-				break;
-			if (++k == L.end())
-			{
-				k--;
-				L.push_back(*p);
-				break;
-			}
-			else
-				k--;
 		}
 	}
 
-	for (list<char>::iterator k = L.begin(); k != L.end(); k++)
+	for (p = L2.begin(); p != L2.end(); p++)
+	{
+		for (forward_list<char>::iterator k = L.begin(); k != L.end();)
+		{
+			if (*k == *p)
+				break;
+			if (++k == L.end())
+			{
+				L.push_front(*p);
+				break;
+			}
+		}
+	}
+
+	for (forward_list<char>::iterator k = L.begin(); k != L.end(); k++)
 		cout << *k << " ";
 	cout << endl;
 }
+
+
+
+
 
 void Part2()
 {
